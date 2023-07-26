@@ -1,4 +1,6 @@
-const products = [
+import IProduct from '../interfaces/IProduct';
+
+const products: IProduct[] = [
   {
     _id: { $oid: '5172d203ffdd81f3234d5f8a' },
     price_max: 145,
@@ -19964,7 +19966,6 @@ const products = [
     page_title: 'Ruffle Front Wrap A-Line Dress',
     name: 'Ruffle Front Wrap A-Line Dress',
     c_isNewtest: true,
-    brand: 'Arlene',
     variation_attributes: [
       {
         values: [
@@ -32021,7 +32022,6 @@ const products = [
     page_title: 'Platinum V Neck Suit Dress',
     name: 'Platinum V Neck Suit Dress',
     c_isNewtest: false,
-    brand: 'Lacy-D',
     variation_attributes: [
       {
         values: [
@@ -68011,7 +68011,6 @@ const products = [
     page_title: 'Cowl Drape Sarong Dress',
     name: 'Cowl Drape Sarong Dress',
     c_isNewtest: true,
-    brand: 'Lacy-D',
     variation_attributes: [
       {
         values: [
@@ -85459,7 +85458,6 @@ const products = [
       'The shirtdress is a classic style that looks amazing on all shapes and sizes.',
     page_title: 'Belted Shirt Dress',
     name: 'Belted Shirt Dress',
-    brand: 'Lacy-S',
     variation_attributes: [
       {
         values: [{ orderable: true, name: 'Dark Stone', value: 'JJ2AFXX' }],

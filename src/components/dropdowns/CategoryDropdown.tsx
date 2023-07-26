@@ -1,15 +1,31 @@
 import React from 'react';
 
-import { Button, ButtonGroup, Dropdown, NavDropdown } from 'react-bootstrap';
+import { useAtom } from 'jotai';
+import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
+import selectedCategoryAtom from '../../atoms/selectedCategory.atom';
+import selectedProductsAtom from '../../atoms/selectedProducts.atom';
 import categories from '../../data/categories';
+import products from '../../data/products';
+import ISubcategory from '../../interfaces/ISubcategory';
 
 interface Props {
   gender: 'Men' | 'Women';
 }
 
 const CategoryDropdown = ({ gender }: Props) => {
+  const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
+  const [selectedProducts, setSelectedProducts] = useAtom(selectedProductsAtom);
+
   const categoryIndex = gender === 'Men' ? 0 : 1;
+
+  const updateCategory = (category: ISubcategory) => {
+    setSelectedProducts(
+      products.filter((product) => product.primary_category_id === category.id)
+    );
+    setSelectedCategory(category);
+  };
 
   return (
     <Dropdown as={ButtonGroup} className="shadow-sm mx-2 border ">
@@ -21,9 +37,15 @@ const CategoryDropdown = ({ gender }: Props) => {
       <Dropdown.Menu>
         {categories[categoryIndex].categories.map((category, categoryIndex) =>
           category.categories?.map((subcategory, subcategoryIndex) => (
-            <NavDropdown.Item key={subcategoryIndex} href="#asd" role="button">
-              {subcategory.name}
-            </NavDropdown.Item>
+            <Link
+              key={subcategoryIndex}
+              onClick={() => updateCategory(subcategory)}
+              to={`/${gender.toLowerCase()}/${subcategory.name.toLowerCase()}`}
+            >
+              <Button className="w-100 shadow-none" variant="">
+                {subcategory.name}
+              </Button>
+            </Link>
           ))
         )}
       </Dropdown.Menu>
