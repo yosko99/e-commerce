@@ -14,7 +14,7 @@ import CategoryDropdown from '../dropdowns/CategoryDropdown';
 
 const Navigation = () => {
   return (
-    <Navbar sticky="top" expand="md" className="bg-body-tertiary mb-3">
+    <Navbar sticky="top" expand="md" className="bg-body-tertiary mb-3 bg-white">
       <Container>
         <Navbar.Brand href="#">
           <Image src={LogoImg} height={30} width={30} />
