@@ -1,4 +1,6 @@
-const categories = [
+import ICategory from '../interfaces/ICategory';
+
+const categories: ICategory[] = [
   {
     _id: {
       $oid: '5172d1daffdd81f3234d5f88'
@@ -176,17 +178,6 @@ const categories = [
             page_description:
               "Shop Women's Jackets, Coats & Outerwear. Classic outdoor-tested garments with traditional styling details that provide comfort, insulation and ease of movement, whatever the weather.",
             page_title: "Women's Outerwear Including Jackets & Collections",
-            parent_category_id: 'womens-clothing',
-            c_showInMenu: true
-          },
-          {
-            id: 'womens-clothing-feeling-red',
-            name: 'Feeling Red',
-            image: 'categories/womens-red-clothing.webp',
-            page_description:
-              "Shop our Women's Red Store. Shirts, sweaters, knits & more all in red.",
-            page_keywords: 'red, clothing',
-            page_title: 'Womens Clothing All in Red',
             parent_category_id: 'womens-clothing',
             c_showInMenu: true
           }
