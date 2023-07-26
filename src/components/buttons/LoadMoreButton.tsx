@@ -21,7 +21,7 @@ const LoadMoreButton = ({
   };
 
   return pagination < productsLength ? (
-    <CenteredItems className="mt-3">
+    <CenteredItems className="my-5">
       <Button onClick={loadMore} className="w-25 fs-5" variant="dark">
         Load more
       </Button>

@@ -17,7 +17,7 @@ const CategoryInfo = ({
     <div>
       <p className="fs-2 m-0">
         {name}{' '}
-        <span className="text-muted" style={{ fontSize: '0.6em' }}>
+        <span className="text-muted" style={{ fontSize: '0.5em' }}>
           {shownProducts} out of {totalProducts}
         </span>
       </p>

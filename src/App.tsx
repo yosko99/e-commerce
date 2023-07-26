@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import selectedCategoryAtom from './atoms/selectedCategory.atom';
 import selectedProductsAtom from './atoms/selectedProducts.atom';
+import Footer from './components/utils/Footer';
 import Navigation from './components/utils/Navigation';
 import products from './data/products';
 import GlobalCSS from './styles/global.css';
@@ -33,6 +34,7 @@ const App = () => {
           <Route path="/*" element={<ProductListingPage />} />
         </Routes>
       </div>
+      <Footer />
     </BrowserRouter>
   );
 };

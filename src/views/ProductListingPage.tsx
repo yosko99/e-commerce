@@ -19,6 +19,7 @@ const ProductListingPage = () => {
 
   useEffect(() => {
     setPagination(defaultPagination);
+    window.scrollTo(0, 0);
   }, [selectedCategory.name, selectedProducts.length]);
 
   return (

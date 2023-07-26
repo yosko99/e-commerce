@@ -12,9 +12,10 @@ import ISubcategory from '../../interfaces/ISubcategory';
 
 interface Props {
   gender: 'Men' | 'Women';
+  className?: string;
 }
 
-const CategoryDropdown = ({ gender }: Props) => {
+const CategoryDropdown = ({ gender, className }: Props) => {
   const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
   const [selectedProducts, setSelectedProducts] = useAtom(selectedProductsAtom);
 
@@ -28,7 +29,7 @@ const CategoryDropdown = ({ gender }: Props) => {
   };
 
   return (
-    <Dropdown as={ButtonGroup} className="shadow-sm mx-2 border ">
+    <Dropdown as={ButtonGroup} className={`shadow-sm mx-2 border ${className}`}>
       <Button variant="" className="text-dark w-100" disabled>
         {gender}
       </Button>
