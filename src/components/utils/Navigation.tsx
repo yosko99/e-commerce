@@ -17,7 +17,8 @@ const Navigation = () => {
     <Navbar sticky="top" expand="md" className="bg-body-tertiary mb-3 bg-white">
       <Container>
         <Navbar.Brand href="#">
-          <Image src={LogoImg} height={30} width={30} />
+          <Image src={LogoImg} className="me-3" height={30} width={30} />
+          Brand name
         </Navbar.Brand>
         <Navbar.Toggle aria-controls={'offcanvasNavbar-expand-md'}>
           <GiHamburgerMenu size={30} />
@@ -29,6 +30,7 @@ const Navigation = () => {
         >
           <Offcanvas.Header closeButton>
             <Offcanvas.Title id={'offcanvasNavbarLabel-expand-md'}>
+              <Image src={LogoImg} className="me-3" height={30} width={30} />
               Brand name
             </Offcanvas.Title>
           </Offcanvas.Header>

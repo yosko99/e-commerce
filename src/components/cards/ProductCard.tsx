@@ -59,7 +59,7 @@ const ProductCard = ({ product }: Props) => {
             maxPrice={product.price_max}
           />
 
-          <Button variant="rounded" className="">
+          <Button variant="dark" className="badge">
             Add to cart
           </Button>
         </div>
