@@ -53,7 +53,7 @@ const CategoryDropdown = ({ gender, className }: Props) => {
       <Dropdown.Toggle variant="" id="dropdown-split-basic" />
 
       <Dropdown.Menu>
-        {categories[categoryIndex].categories.map((category, categoryIndex) =>
+        {categories[categoryIndex].categories.map((category) =>
           category.categories?.map((subcategory, subcategoryIndex) => (
             <Link
               key={subcategoryIndex}

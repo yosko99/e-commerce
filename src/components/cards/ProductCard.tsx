@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Button, Image } from 'react-bootstrap';
 import { Rating } from 'react-simple-star-rating';
@@ -13,19 +13,49 @@ interface Props {
 }
 
 const ProductCard = ({ product }: Props) => {
+  const mainImgLink = product.image_groups[0].images[0].link;
+  const [imgLink, setImgLink] = useState(mainImgLink);
+
+  const handleClick = (link: string) => {
+    setImgLink(link);
+  };
+
+  const handleMouseLeave = () => {
+    setImgLink(mainImgLink);
+  };
+
+  useEffect(() => {
+    setImgLink(mainImgLink);
+  }, [product]);
+
   return (
     <AnimatedDiv>
-      <div className={'border h-100 d-flex flex-column'}>
+      <div
+        className={'border h-100 d-flex flex-column'}
+        onMouseLeave={handleMouseLeave}
+      >
         <div
-          className="d-flex justify-content-center align-items-center"
+          className="d-flex justify-content-center align-items-center flex-column"
           style={{ position: 'relative' }}
         >
           {product.c_isSale && <OnSaleLabel>On sale</OnSaleLabel>}
           <Image
             role="button"
             style={{ width: '100%', height: '250px', objectFit: 'contain' }}
-            src={require(`../../assets/${product.image_groups[0].images[0].link}`)}
+            src={require(`../../assets/${imgLink}`)}
           />
+          <div className="d-flex mt-2">
+            {product.image_groups[0].images.map((image, index) => (
+              <Image
+                role="button"
+                key={index}
+                className="border"
+                onClick={() => handleClick(image.link)}
+                style={{ width: '30px', height: '30px', objectFit: 'contain' }}
+                src={require(`../../assets/${image.link}`)}
+              />
+            ))}
+          </div>
         </div>
         <div className="p-3">
           <p
