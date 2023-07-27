@@ -10,8 +10,7 @@ import selectedCategoryAtom from '../../atoms/selectedCategory.atom';
 import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
 import selectedProductsAtom from '../../atoms/selectedProducts.atom';
 import categories from '../../data/categories';
-import products from '../../data/products';
-import initFilters from '../../functions/initFilters';
+import getCategoryProducts from '../../functions/getCategoryProducts';
 import ISubcategory from '../../interfaces/ISubcategory';
 
 interface Props {
@@ -24,26 +23,20 @@ const CategoryDropdown = ({ gender, className }: Props) => {
   const [selectedProducts, setSelectedProducts] = useAtom(selectedProductsAtom);
   const [filteredProducts, setFilteredProducts] = useAtom(filteredProductsAtom);
   const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
+  const [filters] = useAtom(filtersAtom);
 
   const categoryIndex = gender === 'Men' ? 0 : 1;
 
-  const [filters] = useAtom(filtersAtom);
-
-  const updateCategory = (category: ISubcategory) => {
+  const handleUpdateCategory = (category: ISubcategory) => {
     filters.distinctSizes = new Map();
     filters.distinctSwatches = new Map();
     filters.maxValue = 0;
 
-    const categoryProducts = products.filter((product) => {
-      if (product.primary_category_id === category.id) {
-        initFilters(product, filters);
-      }
-      return product.primary_category_id === category.id;
-    });
+    const categoryProducts = getCategoryProducts(category.id, filters);
 
-    setSelectedCategory(category);
     setSelectedProducts([...categoryProducts]);
     setFilteredProducts([...categoryProducts]);
+    setSelectedCategory(category);
     setSelectedFilters({
       colors: [],
       sizes: [],
@@ -64,8 +57,8 @@ const CategoryDropdown = ({ gender, className }: Props) => {
           category.categories?.map((subcategory, subcategoryIndex) => (
             <Link
               key={subcategoryIndex}
-              onClick={() => updateCategory(subcategory)}
-              to={`/${gender.toLowerCase()}/${subcategory.name.toLowerCase()}`}
+              onClick={() => handleUpdateCategory(subcategory)}
+              to={`/${gender.toLowerCase()}/${subcategory.id}`}
             >
               <Button className="w-100 shadow-none" variant="">
                 {subcategory.name}

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useAtom } from 'jotai';
 import { Button } from 'react-bootstrap';
+import { useSearchParams } from 'react-router-dom';
 
 import filteredProductsAtom from '../../atoms/filteredProducts.atom';
 import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
@@ -11,6 +12,7 @@ import CenteredItems from '../../styles/CenteredItems';
 
 const ApplyFiltersButton = () => {
   const [filteredProducts, setFilteredProducts] = useAtom(filteredProductsAtom);
+  const [searchParams, setSearchParams] = useSearchParams();
   const [selectedProducts] = useAtom(selectedProductsAtom);
   const [selectedFilters] = useAtom(selectedFiltersAtom);
 
@@ -20,11 +22,18 @@ const ApplyFiltersButton = () => {
       selectedFilters
     );
 
+    setSearchParams({
+      sizes: JSON.stringify(selectedFilters.sizes),
+      colors: JSON.stringify(selectedFilters.colors),
+      minValue: selectedFilters.minValue.toString(),
+      maxValue: selectedFilters.maxValue.toString()
+    });
+
     setFilteredProducts([...filteredProducts]);
   };
 
   return (
-    <CenteredItems className="">
+    <CenteredItems>
       <Button variant="info" onClick={handleClick} className="w-100">
         Apply filters
       </Button>

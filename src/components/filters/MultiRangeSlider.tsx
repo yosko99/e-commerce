@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
 
 import { useAtom } from 'jotai';
+// eslint-disable-next-line import/order
 import Slider from 'rc-slider';
 
 import 'rc-slider/assets/index.css';
+import { useSearchParams } from 'react-router-dom';
+
 import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
+import getQueryFilters from '../../functions/getQueryFilters';
 
 interface Props {
   max: number;
+  setDoClearFilter: React.Dispatch<React.SetStateAction<boolean>>;
+  doClearFilter: boolean;
 }
 
-const MultiRangeSlider = ({ max }: Props) => {
+const MultiRangeSlider = ({ max, doClearFilter, setDoClearFilter }: Props) => {
   const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
   const [values, setValues] = useState<number[]>([0, max]);
+  const [searchParams] = useSearchParams();
+  const queryFilters = getQueryFilters(searchParams, max);
 
   const handleChange = (e: number | number[]) => {
     const rangeValues = e as number[];
@@ -25,8 +33,9 @@ const MultiRangeSlider = ({ max }: Props) => {
   };
 
   useEffect(() => {
-    setValues([0, max]);
-  }, [max]);
+    setDoClearFilter(false);
+    setValues([queryFilters.minValue, queryFilters.maxValue]);
+  }, [max, doClearFilter]);
 
   return (
     <div>

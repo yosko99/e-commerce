@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useAtom } from 'jotai';
 import { Navbar, Offcanvas } from 'react-bootstrap';
 
 import filtersAtom from '../../atoms/filters.atom';
 import ApplyFiltersButton from '../buttons/ApplyFiltersButton';
+import ClearFiltersButton from '../buttons/ClearFiltersButton';
 import ColorFilter from '../filters/ColorFilter';
 import MultiRangeSlider from '../filters/MultiRangeSlider';
 import SizeFilter from '../filters/SizeFilter';
 
 const Filters = () => {
   const [filters] = useAtom(filtersAtom);
+  const [doClearFilter, setDoClearFilter] = useState(false);
 
   return (
     <Navbar expand="lg" style={{ boxShadow: 'none' }}>
@@ -33,11 +35,16 @@ const Filters = () => {
         </div>
         <hr className="mt-1" />
         <p className="fs-5">Price</p>
-        <MultiRangeSlider max={filters.maxValue} />
+        <MultiRangeSlider
+          max={filters.maxValue}
+          setDoClearFilter={setDoClearFilter}
+          doClearFilter={doClearFilter}
+        />
         <SizeFilter filters={filters} />
         <ColorFilter filters={filters} />
 
         <ApplyFiltersButton />
+        <ClearFiltersButton setDoClearFilter={setDoClearFilter} />
       </Navbar.Offcanvas>
     </Navbar>
   );

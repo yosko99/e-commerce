@@ -4,6 +4,7 @@ import { useAtom } from 'jotai';
 import { Col, Row } from 'react-bootstrap';
 
 import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
+import updateSelectedFilter from '../../functions/updateSelectedFilter';
 import IFilter from '../../interfaces/IFilter';
 
 interface Props {
@@ -14,15 +15,9 @@ const SizeFilter = ({ filters }: Props) => {
   const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
 
   const handleClick = (value: string) => {
-    const tempFilters = selectedFilters;
-    const indexOfSize = tempFilters.sizes.indexOf(value);
-    if (indexOfSize === -1) {
-      tempFilters.sizes.push(value);
-    } else {
-      tempFilters.sizes.splice(indexOfSize, 1);
-    }
+    updateSelectedFilter(selectedFilters, value, selectedFilters.sizes);
 
-    setSelectedFilters({ ...tempFilters });
+    setSelectedFilters({ ...selectedFilters });
   };
 
   return (
