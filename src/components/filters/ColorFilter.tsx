@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { useAtom } from 'jotai';
 import { Col, Image, Row } from 'react-bootstrap';
 
+import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
 import IFilter from '../../interfaces/IFilter';
 
 interface Props {
@@ -9,6 +11,20 @@ interface Props {
 }
 
 const ColorFilter = ({ filters }: Props) => {
+  const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
+
+  const handleClick = (value: string) => {
+    const tempFilters = selectedFilters;
+    const indexOfColor = tempFilters.colors.indexOf(value);
+    if (indexOfColor === -1) {
+      tempFilters.colors.push(value);
+    } else {
+      tempFilters.colors.splice(indexOfColor, 1);
+    }
+
+    setSelectedFilters({ ...tempFilters });
+  };
+
   return (
     <div>
       {filters.distinctSwatches.size !== 0 && (
@@ -24,8 +40,12 @@ const ColorFilter = ({ filters }: Props) => {
                 className="d-flex justify-content-center align-items-center m-1"
               >
                 <Image
+                  onClick={() => handleClick(swatch[0])}
                   role="button"
-                  className="border"
+                  className={`border ${
+                    selectedFilters.colors.includes(swatch[0]) &&
+                    'border-info border-3'
+                  }`}
                   width={25}
                   height={25}
                   src={require(`../../assets/${swatch[1]}`)}

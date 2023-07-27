@@ -4,8 +4,10 @@ import { useAtom } from 'jotai';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import filteredProductsAtom from '../../atoms/filteredProducts.atom';
 import filtersAtom from '../../atoms/filters.atom';
 import selectedCategoryAtom from '../../atoms/selectedCategory.atom';
+import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
 import selectedProductsAtom from '../../atoms/selectedProducts.atom';
 import categories from '../../data/categories';
 import products from '../../data/products';
@@ -20,6 +22,8 @@ interface Props {
 const CategoryDropdown = ({ gender, className }: Props) => {
   const [selectedCategory, setSelectedCategory] = useAtom(selectedCategoryAtom);
   const [selectedProducts, setSelectedProducts] = useAtom(selectedProductsAtom);
+  const [filteredProducts, setFilteredProducts] = useAtom(filteredProductsAtom);
+  const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
 
   const categoryIndex = gender === 'Men' ? 0 : 1;
 
@@ -30,15 +34,22 @@ const CategoryDropdown = ({ gender, className }: Props) => {
     filters.distinctSwatches = new Map();
     filters.maxValue = 0;
 
-    setSelectedProducts(
-      products.filter((product) => {
-        if (product.primary_category_id === category.id) {
-          initFilters(product, filters);
-        }
-        return product.primary_category_id === category.id;
-      })
-    );
+    const categoryProducts = products.filter((product) => {
+      if (product.primary_category_id === category.id) {
+        initFilters(product, filters);
+      }
+      return product.primary_category_id === category.id;
+    });
+
     setSelectedCategory(category);
+    setSelectedProducts([...categoryProducts]);
+    setFilteredProducts([...categoryProducts]);
+    setSelectedFilters({
+      colors: [],
+      sizes: [],
+      maxValue: filters.maxValue,
+      minValue: 0
+    });
   };
 
   return (

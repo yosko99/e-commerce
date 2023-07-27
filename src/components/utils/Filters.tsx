@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { useAtom } from 'jotai';
-import { Button, Navbar } from 'react-bootstrap';
+import { Navbar, Offcanvas } from 'react-bootstrap';
 
 import filtersAtom from '../../atoms/filters.atom';
-import CenteredItems from '../../styles/CenteredItems';
+import ApplyFiltersButton from '../buttons/ApplyFiltersButton';
 import ColorFilter from '../filters/ColorFilter';
 import MultiRangeSlider from '../filters/MultiRangeSlider';
 import SizeFilter from '../filters/SizeFilter';
@@ -27,18 +27,17 @@ const Filters = () => {
         className="p-3 h-100"
         style={{ height: '100%', overflow: 'auto' }}
       >
-        <p className="fs-4 mb-0">Filters</p>
+        <div className="d-flex justify-content-between">
+          <p className="fs-4 mb-0">Filters</p>
+          <Offcanvas.Header closeButton></Offcanvas.Header>
+        </div>
         <hr className="mt-1" />
         <p className="fs-5">Price</p>
         <MultiRangeSlider max={filters.maxValue} />
         <SizeFilter filters={filters} />
         <ColorFilter filters={filters} />
 
-        <CenteredItems className="">
-          <Button variant="info" className="w-100">
-            Apply filters
-          </Button>
-        </CenteredItems>
+        <ApplyFiltersButton />
       </Navbar.Offcanvas>
     </Navbar>
   );

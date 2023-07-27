@@ -21,7 +21,7 @@ const initFilters = (product: IProduct, filter: IFilter) => {
     product.variation_attributes[1] !== undefined
   ) {
     const { values } = product.variation_attributes[1];
-    values.forEach((sizes) => {
+    values.forEach((sizes: any) => {
       const { name, value } = sizes;
       if (!filter.distinctSizes.has(name)) {
         filter.distinctSizes.set(name, value);

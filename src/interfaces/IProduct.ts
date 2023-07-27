@@ -1,14 +1,4 @@
-interface AttributeValue {
-  orderable: boolean;
-  name: string;
-  value: string;
-}
-
-interface VariationAttribute {
-  values: AttributeValue[];
-  id: string;
-  name: string;
-}
+import IVariationAttribute from './IVariationAttribute';
 
 interface Master {
   orderable: boolean;
@@ -53,7 +43,7 @@ interface IProduct {
   page_title?: string;
   name: string;
   price: number;
-  variation_attributes?: VariationAttribute[];
+  variation_attributes?: IVariationAttribute[];
   id: string;
   currency: string;
   master?: Master;
