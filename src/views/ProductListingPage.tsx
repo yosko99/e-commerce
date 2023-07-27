@@ -8,6 +8,7 @@ import selectedProductsAtom from '../atoms/selectedProducts.atom';
 import LoadMoreButton from '../components/buttons/LoadMoreButton';
 import ProductCard from '../components/cards/ProductCard';
 import CategoryInfo from '../components/utils/CategoryInfo';
+import Filters from '../components/utils/Filters';
 
 const ProductListingPage = () => {
   const [selectedCategory] = useAtom(selectedCategoryAtom);
@@ -25,8 +26,10 @@ const ProductListingPage = () => {
   return (
     <Container>
       <Row>
-        <Col lg={2}>filters</Col>
-        <Col lg={10}>
+        <Col lg={3}>
+          <Filters />
+        </Col>
+        <Col lg={9}>
           <Row>
             <Col lg={10}>
               <CategoryInfo

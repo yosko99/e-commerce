@@ -43,7 +43,7 @@ const Footer = () => {
                 obcaecati? Dignissimos.
               </p>
             </div>
-            <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+            <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
               <h6 className="text-uppercase fw-bold mb-4">Categories</h6>
               <CategoryDropdown gender="Men" className="ms-0 mt-3" />
               <CategoryDropdown gender="Women" className="mt-3 ms-0" />
@@ -96,7 +96,7 @@ const Footer = () => {
 
       <div
         className="text-center p-4"
-        style={{ backgroundColor: ' rgba(0, 0, 0, 0.025);' }}
+        style={{ backgroundColor: ' rgba(0, 0, 0, 0.025)' }}
       >
         © 2021 Copyright:
         <a

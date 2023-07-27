@@ -4,10 +4,12 @@ import { useAtom } from 'jotai';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
+import filtersAtom from '../../atoms/filters.atom';
 import selectedCategoryAtom from '../../atoms/selectedCategory.atom';
 import selectedProductsAtom from '../../atoms/selectedProducts.atom';
 import categories from '../../data/categories';
 import products from '../../data/products';
+import initFilters from '../../functions/initFilters';
 import ISubcategory from '../../interfaces/ISubcategory';
 
 interface Props {
@@ -21,9 +23,20 @@ const CategoryDropdown = ({ gender, className }: Props) => {
 
   const categoryIndex = gender === 'Men' ? 0 : 1;
 
+  const [filters] = useAtom(filtersAtom);
+
   const updateCategory = (category: ISubcategory) => {
+    filters.distinctSizes = new Map();
+    filters.distinctSwatches = new Map();
+    filters.maxValue = 0;
+
     setSelectedProducts(
-      products.filter((product) => product.primary_category_id === category.id)
+      products.filter((product) => {
+        if (product.primary_category_id === category.id) {
+          initFilters(product, filters);
+        }
+        return product.primary_category_id === category.id;
+      })
     );
     setSelectedCategory(category);
   };
