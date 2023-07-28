@@ -30,13 +30,17 @@ const QuickViewProductBody = ({ product }: Props) => {
   });
 
   useEffect(() => {
+    variants.distinctSizes = new Map();
+    variants.distinctSwatches = new Map();
+
     initFilters(product, variants);
     setVariants({ ...variants });
     const firstColor = getFirstMapEntries(variants.distinctSwatches);
     setSelectedColor(firstColor[0]);
     const firstSize = getFirstMapEntries(variants.distinctSizes);
     setSelectedSize(firstSize[0]);
-  }, []);
+    setImageGroup(product.image_groups[0]);
+  }, [product]);
 
   return (
     <CenteredItems>
@@ -94,7 +98,7 @@ const QuickViewProductBody = ({ product }: Props) => {
             <Button variant="outline-secondary">Add to wishlist</Button>
             <Button variant="outline-secondary">Add to gift registry</Button>
           </div>
-          <ShareButtons size={40} className="my-3" />
+          <ShareButtons size={40} className="my-3 mb-4" />
         </div>
       </div>
     </CenteredItems>
