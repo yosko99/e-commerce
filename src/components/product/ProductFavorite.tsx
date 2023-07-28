@@ -53,7 +53,6 @@ const ProductFavorite = ({ product, className }: Props) => {
 
   return (
     <CustomToast
-      header="Product liked"
       body={`${product.name} was ${
         checkIfProductLiked(product.id) ? 'added' : 'removed'
       } from your favorites`}

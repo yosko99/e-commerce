@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { Rating } from 'react-simple-star-rating';
 
 import IProduct from '../../interfaces/IProduct';
 import AnimatedDiv from '../../styles/AnimatedDiv';
 import OnSaleLabel from '../../styles/OnSaleLabel';
+import AddToCartButton from '../buttons/AddToCartButton';
 import ProductFavorite from '../product/ProductFavorite';
 import ProductPrice from '../product/ProductPrice';
 import ProductThumbnails from '../product/ProductThumbnails';
@@ -82,10 +83,7 @@ const ProductCard = ({ product }: Props) => {
               price={product.price}
               maxPrice={product.price_max}
             />
-
-            <Button variant="dark" className="badge">
-              Add to cart
-            </Button>
+            <AddToCartButton productName={product.name} />
           </div>
         </div>
       </div>

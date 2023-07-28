@@ -1,48 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import { Toast } from 'react-bootstrap';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from 'react-toastify';
 
 interface Props {
   activateElement: React.ReactNode;
-  header: string;
   body: string;
 }
 
-const CustomToast = ({ activateElement, body, header }: Props) => {
-  const [show, setShow] = useState(false);
+const CustomToast = ({ activateElement, body }: Props) => {
+  const notify = () =>
+    toast.info(body, {
+      position: 'bottom-left',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      className: 'm-2 shadow-sm me-4',
+      progress: undefined,
+      theme: 'light'
+    });
 
   return (
     <div>
-      <div onClick={() => setShow(true)}>{activateElement}</div>
-
-      {show && (
-        <div
-          style={{
-            position: 'fixed',
-            bottom: '20px',
-            left: '10px',
-            zIndex: 9999
-          }}
-        >
-          <Toast
-            onClose={() => setShow(false)}
-            show={show}
-            delay={3000}
-            className="w-100"
-            autohide
-          >
-            <Toast.Header>
-              <img
-                src="holder.js/20x20?text=%20"
-                className="rounded me-2"
-                alt=""
-              />
-              <strong className="me-auto">{header}</strong>
-            </Toast.Header>
-            <Toast.Body>{body}</Toast.Body>
-          </Toast>
-        </div>
-      )}
+      <div onClick={notify}>{activateElement}</div>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={50000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };
