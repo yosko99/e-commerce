@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useAtom } from 'jotai';
-import { Col, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
 import updateSelectedFilter from '../../functions/updateSelectedFilter';
 import IFilter from '../../interfaces/IFilter';
+import ProductSize from '../product/sizes/ProductSize';
 
 interface Props {
   filters: IFilter;
@@ -27,23 +28,17 @@ const SizeFilter = ({ filters }: Props) => {
           <p className="fs-5">Sizes</p>
           <Row>
             {Array.from(filters.distinctSizes).map((size, index) => (
-              <Col
+              <ProductSize
                 onClick={() => handleClick(size[1])}
-                lg={2}
-                xs={2}
-                md={2}
-                style={{ width: '50px', height: '50px' }}
+                name={size[0]}
+                value={size[1]}
                 key={index}
-                role="button"
-                className={`border m-1 d-flex justify-content-center align-items-center ${
+                className={
                   selectedFilters.sizes.includes(size[1])
                     ? 'bg-dark text-white'
                     : 'bg-white'
-                }`}
-                id={size[1]}
-              >
-                <p className="m-0 p-2">{size[0].slice(0, 3)}</p>
-              </Col>
+                }
+              />
             ))}
           </Row>
         </div>

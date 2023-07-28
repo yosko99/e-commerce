@@ -6,11 +6,12 @@ import { ToastContainer, toast } from 'react-toastify';
 interface Props {
   activateElement: React.ReactNode;
   body: string;
+  type: 'default' | 'error' | 'info' | 'success' | 'warning';
 }
 
-const CustomToast = ({ activateElement, body }: Props) => {
+const CustomToast = ({ activateElement, body, type }: Props) => {
   const notify = () =>
-    toast.info(body, {
+    toast(body, {
       position: 'bottom-left',
       autoClose: 3000,
       hideProgressBar: false,
@@ -19,7 +20,8 @@ const CustomToast = ({ activateElement, body }: Props) => {
       draggable: true,
       className: 'm-2 shadow-sm me-4',
       progress: undefined,
-      theme: 'light'
+      theme: 'light',
+      type
     });
 
   return (

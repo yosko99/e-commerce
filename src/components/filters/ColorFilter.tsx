@@ -1,11 +1,12 @@
 import React from 'react';
 
 import { useAtom } from 'jotai';
-import { Col, Image, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 import selectedFiltersAtom from '../../atoms/selectedFilters.atom';
 import updateSelectedFilter from '../../functions/updateSelectedFilter';
 import IFilter from '../../interfaces/IFilter';
+import ProductColor from '../product/colors/ProductColor';
 
 interface Props {
   filters: IFilter;
@@ -27,25 +28,18 @@ const ColorFilter = ({ filters }: Props) => {
           <p className="fs-5 mt-4">Colors</p>
           <Row>
             {Array.from(filters.distinctSwatches).map((swatch, index) => (
-              <Col
+              <ProductColor
                 key={index}
-                lg={1}
-                xs={1}
-                md={1}
-                className="d-flex justify-content-center align-items-center m-1"
-              >
-                <Image
-                  onClick={() => handleClick(swatch[0])}
-                  role="button"
-                  className={`border ${
-                    selectedFilters.colors.includes(swatch[0]) &&
-                    'border-info border-3'
-                  }`}
-                  width={25}
-                  height={25}
-                  src={require(`../../assets/${swatch[1]}`)}
-                />
-              </Col>
+                colSize={1}
+                size={25}
+                link={swatch[1]}
+                onClick={() => handleClick(swatch[0])}
+                className={
+                  selectedFilters.colors.includes(swatch[0])
+                    ? 'border-info border-3'
+                    : ''
+                }
+              />
             ))}
           </Row>
         </div>

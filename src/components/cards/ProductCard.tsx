@@ -1,51 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import { Image } from 'react-bootstrap';
 import { Rating } from 'react-simple-star-rating';
 
 import IProduct from '../../interfaces/IProduct';
 import AnimatedDiv from '../../styles/AnimatedDiv';
-import OnSaleLabel from '../../styles/OnSaleLabel';
+import OnSaleLabel from '../../styles/labels/OnSaleLabel';
 import AddToCartButton from '../buttons/AddToCartButton';
 import ProductFavorite from '../product/ProductFavorite';
+import ProductImageWithThumbnails from '../product/ProductImageWithThumbnails';
 import ProductPrice from '../product/ProductPrice';
-import ProductThumbnails from '../product/ProductThumbnails';
+import QuickViewProduct from '../product/QuickViewProduct';
 
 interface Props {
   product: IProduct;
 }
 
 const ProductCard = ({ product }: Props) => {
-  const mainImgLink = product.image_groups[0].images[0].link;
-  const [imgLink, setImgLink] = useState(mainImgLink);
-
-  const handleMouseLeave = () => {
-    setImgLink(mainImgLink);
-  };
-
-  useEffect(() => {
-    setImgLink(mainImgLink);
-  }, [product]);
+  const [isImageHovered, setIsImageHovered] = useState(false);
 
   return (
     <AnimatedDiv>
-      <div
-        className={'border h-100 d-flex flex-column'}
-        onMouseLeave={handleMouseLeave}
-      >
+      <div className={'border h-100 d-flex flex-column'}>
         <div
           className="d-flex justify-content-center align-items-center flex-column"
           style={{ position: 'relative' }}
+          onMouseEnter={() => setIsImageHovered(true)}
+          onMouseLeave={() => setIsImageHovered(false)}
         >
           {product.c_isSale && <OnSaleLabel>On sale</OnSaleLabel>}
-          <Image
-            role="button"
-            style={{ width: '100%', height: '250px', objectFit: 'contain' }}
-            src={require(`../../assets/${imgLink}`)}
-          />
-          <ProductThumbnails
+          {isImageHovered && (
+            <QuickViewProduct
+              onCloseFunction={() => setIsImageHovered(false)}
+              product={product}
+            />
+          )}
+          <ProductImageWithThumbnails
             imageGroup={product.image_groups[0]}
-            setImgLink={setImgLink}
+            imageSize="250px"
+            thumbnailSize="30px"
           />
         </div>
         <div className="p-3">
@@ -79,11 +71,12 @@ const ProductCard = ({ product }: Props) => {
           </p>
           <div className="d-flex align-items-center justify-content-between">
             <ProductPrice
+              className="fs-5"
               isSale={product.c_isSale}
               price={product.price}
               maxPrice={product.price_max}
             />
-            <AddToCartButton productName={product.name} />
+            <AddToCartButton productName={product.name} className="badge" />
           </div>
         </div>
       </div>
