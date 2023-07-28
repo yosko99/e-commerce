@@ -1,21 +1,10 @@
+import IImageGroup from './IImageGroup';
 import IVariationAttribute from './IVariationAttribute';
 
 interface Master {
   orderable: boolean;
   price: number;
   master_id: string;
-}
-
-interface IImage {
-  alt: string;
-  link: string;
-  title: string;
-}
-
-interface ImageGroup {
-  images: IImage[];
-  view_type: string;
-  variation_value?: string;
 }
 
 interface Variant {
@@ -48,7 +37,7 @@ interface IProduct {
   currency: string;
   master?: Master;
   primary_category_id: string;
-  image_groups: ImageGroup[];
+  image_groups: IImageGroup[];
   short_description: string;
   orderable: boolean;
   variants?: Variant[];

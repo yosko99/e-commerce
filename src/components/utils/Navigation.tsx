@@ -10,6 +10,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 import LogoImg from '../../assets/logo.webp';
+import FavoriteButton from '../buttons/FavoriteButton';
 import CategoryDropdown from '../dropdowns/CategoryDropdown';
 
 const Navigation = () => {
@@ -36,6 +37,7 @@ const Navigation = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
+              <FavoriteButton />
               <CategoryDropdown gender="Men" />
               <CategoryDropdown gender="Women" />
             </Nav>
@@ -43,7 +45,7 @@ const Navigation = () => {
               <Form.Control
                 type="search"
                 placeholder="Search"
-                className="me-2"
+                className="me-2 rounded"
                 aria-label="Search"
               />
               <Button variant="outline-success">Search</Button>

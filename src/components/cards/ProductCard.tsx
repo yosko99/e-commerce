@@ -6,7 +6,9 @@ import { Rating } from 'react-simple-star-rating';
 import IProduct from '../../interfaces/IProduct';
 import AnimatedDiv from '../../styles/AnimatedDiv';
 import OnSaleLabel from '../../styles/OnSaleLabel';
+import ProductFavorite from '../product/ProductFavorite';
 import ProductPrice from '../product/ProductPrice';
+import ProductThumbnails from '../product/ProductThumbnails';
 
 interface Props {
   product: IProduct;
@@ -15,10 +17,6 @@ interface Props {
 const ProductCard = ({ product }: Props) => {
   const mainImgLink = product.image_groups[0].images[0].link;
   const [imgLink, setImgLink] = useState(mainImgLink);
-
-  const handleClick = (link: string) => {
-    setImgLink(link);
-  };
 
   const handleMouseLeave = () => {
     setImgLink(mainImgLink);
@@ -44,18 +42,10 @@ const ProductCard = ({ product }: Props) => {
             style={{ width: '100%', height: '250px', objectFit: 'contain' }}
             src={require(`../../assets/${imgLink}`)}
           />
-          <div className="d-flex mt-2">
-            {product.image_groups[0].images.map((image, index) => (
-              <Image
-                role="button"
-                key={index}
-                className="border"
-                onClick={() => handleClick(image.link)}
-                style={{ width: '30px', height: '30px', objectFit: 'contain' }}
-                src={require(`../../assets/${image.link}`)}
-              />
-            ))}
-          </div>
+          <ProductThumbnails
+            imageGroup={product.image_groups[0]}
+            setImgLink={setImgLink}
+          />
         </div>
         <div className="p-3">
           <p
@@ -68,12 +58,14 @@ const ProductCard = ({ product }: Props) => {
           >
             {product.name}
           </p>
-          <Rating
-            size={15}
-            readonly
-            className="mb-3"
-            initialValue={Math.floor(Math.random() * 5)}
-          />
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <Rating
+              size={15}
+              readonly
+              initialValue={Math.floor(Math.random() * 5)}
+            />
+            <ProductFavorite product={product} />
+          </div>
           <p
             style={{
               fontSize: '0.8em',
