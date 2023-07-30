@@ -20,6 +20,7 @@ const FavoritesPage = () => {
         products.filter((product) => productIds.includes(product.id))
       );
     }
+    window.scrollTo(0, 0);
   }, []);
 
   return (

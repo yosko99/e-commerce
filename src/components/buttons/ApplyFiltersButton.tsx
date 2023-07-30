@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { Button } from 'react-bootstrap';
 import { useSearchParams } from 'react-router-dom';
 
@@ -11,7 +11,7 @@ import getFilteredProducts from '../../functions/getFilteredProducts';
 import CenteredItems from '../../styles/CenteredItems';
 
 const ApplyFiltersButton = () => {
-  const [filteredProducts, setFilteredProducts] = useAtom(filteredProductsAtom);
+  const setFilteredProducts = useSetAtom(filteredProductsAtom);
   const [searchParams, setSearchParams] = useSearchParams();
   const [selectedProducts] = useAtom(selectedProductsAtom);
   const [selectedFilters] = useAtom(selectedFiltersAtom);

@@ -23,6 +23,7 @@ const QuickViewProductBody = ({ product }: Props) => {
   const [imageGroup, setImageGroup] = useState(product.image_groups[0]);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState('');
+  const [qty, setQty] = useState(1);
   const [variants, setVariants] = useState<IFilter>({
     distinctSwatches: new Map(),
     distinctSizes: new Map(),
@@ -79,12 +80,16 @@ const QuickViewProductBody = ({ product }: Props) => {
             <Form.Control
               type="number"
               min={1}
-              defaultValue={1}
+              value={qty}
+              onChange={(e) => setQty(Number(e.target.value))}
               max={9}
               style={{ width: '50px', height: '50px' }}
             />
             <AddToCartButton
-              productName={product.name}
+              product={product}
+              qty={qty}
+              color={selectedColor}
+              size={selectedSize}
               className="ms-2 bg-dark"
             />
           </div>

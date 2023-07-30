@@ -2,12 +2,14 @@ import React, { useRef, useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
-import { BiSearchAlt, BiSolidCart, BiSolidUser } from 'react-icons/bi';
+import { BiSolidUser } from 'react-icons/bi';
 
+import CartButton from './buttons/CartButton';
+import FavoriteButton from './buttons/FavoriteButton';
+import SearchProductButton from './buttons/SearchProductButton';
 import NavigationBrand from './NavigationBrand';
 import NavigationTopBar from './NavigationTopBar';
 import CenteredItems from '../../styles/CenteredItems';
-import FavoriteButton from '../buttons/FavoriteButton';
 import NavigationCategoryButton from '../buttons/NavigationCategoryButton';
 import NavbarCategories from '../category/NavbarCategories';
 import OffCanvasCategories from '../category/OffCanvasCategories';
@@ -62,18 +64,9 @@ const Navigation = () => {
             isInputFocused={isInputFocused}
           />
           <div className="d-flex">
-            <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
-              <BiSearchAlt
-                onClick={handleSearchClick}
-                className="d-md-none"
-                size={30}
-                color="white"
-              />
-            </CenteredItems>
+            <SearchProductButton handleSearchClick={handleSearchClick} />
             <FavoriteButton />
-            <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
-              <BiSolidCart size={30} color="white" />
-            </CenteredItems>
+            <CartButton />
             <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
               <BiSolidUser size={30} color="white" />
             </CenteredItems>

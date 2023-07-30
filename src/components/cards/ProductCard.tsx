@@ -49,7 +49,7 @@ const ProductCard = ({ product }: Props) => {
           </p>
           <div className="d-flex align-items-center justify-content-between">
             <ProductPrice className="fs-5" product={product} />
-            <AddToCartButton productName={product.name} className="badge" />
+            <AddToCartButton product={product} className="badge" />
           </div>
         </div>
       </div>

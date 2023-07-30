@@ -28,6 +28,7 @@ const ProductImageWithThumbnails = ({
   return (
     <CenteredItems flexColumn className={`h-100 ${className}`}>
       <Image
+        alt={imageGroup.images[0].alt}
         role="button"
         style={{ width: '100%', height: imageSize, objectFit: 'contain' }}
         src={require(`../../assets/${imgLink}`)}

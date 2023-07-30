@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import { useAtom } from 'jotai';
 import { Navbar, Offcanvas } from 'react-bootstrap';
 
+import ColorFilter from './ColorFilter';
+import MultiRangeSlider from './MultiRangeSlider';
+import SizeFilter from './SizeFilter';
 import filtersAtom from '../../atoms/filters.atom';
 import ApplyFiltersButton from '../buttons/ApplyFiltersButton';
 import ClearFiltersButton from '../buttons/ClearFiltersButton';
-import ColorFilter from '../filters/ColorFilter';
-import MultiRangeSlider from '../filters/MultiRangeSlider';
-import SizeFilter from '../filters/SizeFilter';
 
 const Filters = () => {
   const [filters] = useAtom(filtersAtom);

@@ -3,7 +3,7 @@ import React from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 import { useNavigate } from 'react-router-dom';
 
-import CenteredItems from '../../styles/CenteredItems';
+import CenteredItems from '../../../styles/CenteredItems';
 
 const FavoriteButton = () => {
   const navigate = useNavigate();

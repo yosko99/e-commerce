@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useSearchParams } from 'react-router-dom';
 
 import filteredProductsAtom from '../atoms/filteredProducts.atom';
@@ -12,10 +12,10 @@ export const useClearFilters = (
   setDoClearFilter?: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
-  const [filteredProducts, setFilteredProducts] = useAtom(filteredProductsAtom);
-  const [selectedProducts] = useAtom(selectedProductsAtom);
-  const [filters] = useAtom(filtersAtom);
+  const setSelectedFilters = useSetAtom(selectedFiltersAtom);
+  const setFilteredProducts = useSetAtom(filteredProductsAtom);
+  const selectedProducts = useAtomValue(selectedProductsAtom);
+  const filters = useAtomValue(filtersAtom);
 
   const handleClick = () => {
     setSearchParams({});
