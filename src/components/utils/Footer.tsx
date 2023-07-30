@@ -6,10 +6,9 @@ import { BsFillHouseDoorFill } from 'react-icons/bs';
 import { LiaFaxSolid } from 'react-icons/lia';
 import { MdMail } from 'react-icons/md';
 
-import CompaniesImg from '../../assets/frontPage/companies.webp';
-import LogoImg from '../../assets/logo.webp';
+import CompaniesImg from '../../assets/global/companies.webp';
 import CenteredItems from '../../styles/CenteredItems';
-import CategoryDropdown from '../dropdowns/CategoryDropdown';
+import CategoryDropdown from '../category/CategoryDropdown';
 
 const Footer = () => {
   return (
@@ -27,16 +26,7 @@ const Footer = () => {
         <div className="container text-center text-md-start mt-5">
           <div className="row mt-3">
             <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-              <h6 className="text-uppercase fw-bold mb-4">
-                <Image
-                  src={LogoImg}
-                  fluid
-                  height={25}
-                  width={25}
-                  className="me-2"
-                />
-                Brand name
-              </h6>
+              <h6 className="text-uppercase fw-bold mb-4">Brand name</h6>
               <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
                 sapiente commodi soluta non, repudiandae ipsam quidem molestias

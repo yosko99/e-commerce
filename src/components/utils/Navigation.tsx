@@ -1,59 +1,94 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 
-import { Image } from 'react-bootstrap';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import Offcanvas from 'react-bootstrap/Offcanvas';
-import { GiHamburgerMenu } from 'react-icons/gi';
+import { BiSearchAlt, BiSolidCart, BiSolidUser } from 'react-icons/bi';
 
-import LogoImg from '../../assets/logo.webp';
+import NavigationTopBar from './NavigationTopBar';
+import { useClearFilters } from '../../hooks/useClearFilters';
+import CenteredItems from '../../styles/CenteredItems';
 import FavoriteButton from '../buttons/FavoriteButton';
-import CategoryDropdown from '../dropdowns/CategoryDropdown';
+import NavigationCategoryButton from '../buttons/NavigationCategoryButton';
+import NavbarCategories from '../category/NavbarCategories';
+import OffCanvasCategories from '../category/OffCanvasCategories';
+import ProductSearch from '../filters/ProductSearch';
 
 const Navigation = () => {
+  const { handleClick: handleClearFilters } = useClearFilters();
+  const [hoveredCategory, setHoveredCategory] = useState('');
+  const [categoryIndex, setCategoryIndex] = useState(-1);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isInputFocused, setIsInputFocused] = useState(false);
+
+  const handleMouseLeave = () => {
+    setHoveredCategory('');
+    setCategoryIndex(-1);
+  };
+
+  const handleMouseOver = (gender: 'men' | 'women') => {
+    setCategoryIndex(gender === 'men' ? 0 : 1);
+    setHoveredCategory(gender);
+  };
+
+  const handleSearchClick = () => {
+    setIsInputFocused(true);
+    inputRef.current?.focus();
+  };
+
   return (
-    <Navbar sticky="top" expand="md" className="bg-body-tertiary mb-3 bg-white">
-      <Container>
-        <Navbar.Brand href="#">
-          <Image src={LogoImg} className="me-3" height={30} width={30} />
-          Brand name
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls={'offcanvasNavbar-expand-md'}>
-          <GiHamburgerMenu size={30} />
-        </Navbar.Toggle>
-        <Navbar.Offcanvas
-          id={'offcanvasNavbar-expand-md'}
-          aria-labelledby={'offcanvasNavbarLabel-expand-md'}
-          placement="end"
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id={'offcanvasNavbarLabel-expand-md'}>
-              <Image src={LogoImg} className="me-3" height={30} width={30} />
-              Brand name
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              <FavoriteButton />
-              <CategoryDropdown gender="Men" />
-              <CategoryDropdown gender="Women" />
-            </Nav>
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2 rounded"
-                aria-label="Search"
+    <React.Fragment>
+      <NavigationTopBar />
+      <Navbar
+        sticky="top"
+        onMouseLeave={handleMouseLeave}
+        style={{ backgroundColor: '#2D2D2D' }}
+        className="bg-body-tertiary p-0 d-flex flex-column"
+      >
+        <Container style={{ height: '60px' }}>
+          <OffCanvasCategories />
+          <Navbar.Brand
+            href="#"
+            onClick={handleClearFilters}
+            className="text-white"
+          >
+            <p className="m-0 fw-bold">Brand</p>
+          </Navbar.Brand>
+          <NavigationCategoryButton
+            gender="men"
+            hoveredCategory={hoveredCategory}
+            onMouseEnter={() => handleMouseOver('men')}
+          />
+          <NavigationCategoryButton
+            gender="women"
+            hoveredCategory={hoveredCategory}
+            onMouseEnter={() => handleMouseOver('women')}
+          />
+          <ProductSearch
+            inputRef={inputRef}
+            setIsInputFocused={setIsInputFocused}
+            isInputFocused={isInputFocused}
+          />
+          <div className="d-flex">
+            <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
+              <BiSearchAlt
+                onClick={handleSearchClick}
+                className="d-md-none"
+                size={30}
+                color="white"
               />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
-      </Container>
-    </Navbar>
+            </CenteredItems>
+            <FavoriteButton />
+            <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
+              <BiSolidCart size={30} color="white" />
+            </CenteredItems>
+            <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
+              <BiSolidUser size={30} color="white" />
+            </CenteredItems>
+          </div>
+        </Container>
+        <NavbarCategories categoryIndex={categoryIndex} />
+      </Navbar>
+    </React.Fragment>
   );
 };
 

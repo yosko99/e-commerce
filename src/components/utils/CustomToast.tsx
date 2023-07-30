@@ -18,7 +18,7 @@ const CustomToast = ({ activateElement, body, type }: Props) => {
       closeOnClick: true,
       pauseOnHover: true,
       draggable: true,
-      className: 'm-2 shadow-sm me-4',
+      className: 'm-2 me-4 shadow-none border',
       progress: undefined,
       theme: 'light',
       type

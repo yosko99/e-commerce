@@ -13,8 +13,10 @@ import selectedProductsAtom from '../atoms/selectedProducts.atom';
 import LoadMoreButton from '../components/buttons/LoadMoreButton';
 import ProductSort from '../components/filters/ProductSort';
 import MultipleProducts from '../components/product/MultipleProducts';
+import Breadcrumbs from '../components/utils/Breadcrumbs';
 import CategoryInfo from '../components/utils/CategoryInfo';
 import Filters from '../components/utils/Filters';
+import Navigation from '../components/utils/Navigation';
 import getCategoryProducts from '../functions/getCategoryProducts';
 import getFilteredProducts from '../functions/getFilteredProducts';
 import getQueryFilters from '../functions/getQueryFilters';
@@ -56,40 +58,44 @@ const ProductListingPage = () => {
   }, []);
 
   return (
-    <Container>
-      <Row>
-        <Col lg={3}>
-          <Filters />
-        </Col>
-        <Col lg={9}>
-          <Row>
-            <Col lg={10}>
-              <CategoryInfo
-                shownProducts={pagination}
-                totalProducts={filteredProducts.length}
-                name={selectedCategory.name}
-                description={selectedCategory.page_description}
+    <>
+      <Navigation />
+      <Breadcrumbs />
+      <Container className="mt-3">
+        <Row>
+          <Col lg={3}>
+            <Filters />
+          </Col>
+          <Col lg={9}>
+            <Row>
+              <Col lg={10}>
+                <CategoryInfo
+                  shownProducts={pagination}
+                  totalProducts={filteredProducts.length}
+                  name={selectedCategory.name}
+                  description={selectedCategory.page_description}
+                />
+              </Col>
+              <Col lg={2}>
+                <ProductSort />
+              </Col>
+            </Row>
+            <hr />
+            <Row>
+              <MultipleProducts
+                pagination={pagination}
+                products={filteredProducts}
               />
-            </Col>
-            <Col lg={2}>
-              <ProductSort />
-            </Col>
-          </Row>
-          <hr />
-          <Row>
-            <MultipleProducts
+            </Row>
+            <LoadMoreButton
               pagination={pagination}
-              products={filteredProducts}
+              setPagination={setPagination}
+              productsLength={filteredProducts.length}
             />
-          </Row>
-          <LoadMoreButton
-            pagination={pagination}
-            setPagination={setPagination}
-            productsLength={filteredProducts.length}
-          />
-        </Col>
-      </Row>
-    </Container>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

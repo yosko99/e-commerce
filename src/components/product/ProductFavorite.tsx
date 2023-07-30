@@ -42,8 +42,6 @@ const ProductFavorite = ({ product, className }: Props) => {
       );
       localStorage.setItem('liked', JSON.stringify(likedProducts));
     }
-
-    window.dispatchEvent(new Event('storage'));
     changeIcon();
   };
 
@@ -55,8 +53,8 @@ const ProductFavorite = ({ product, className }: Props) => {
     <CustomToast
       type="info"
       body={`${product.name} was ${
-        checkIfProductLiked(product.id) ? 'added' : 'removed'
-      } from your favorites`}
+        checkIfProductLiked(product.id) ? 'removed from' : 'added to'
+      } your favorites`}
       activateElement={
         <div className={className} onClick={handleClick} role="button">
           {heart}

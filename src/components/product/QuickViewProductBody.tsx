@@ -13,7 +13,7 @@ import IFilter from '../../interfaces/IFilter';
 import IProduct from '../../interfaces/IProduct';
 import CenteredItems from '../../styles/CenteredItems';
 import AddToCartButton from '../buttons/AddToCartButton';
-import ShareButtons from '../utils/ShareButtons';
+import ShareButtons from '../buttons/ShareButtons';
 
 interface Props {
   product: IProduct;
@@ -90,7 +90,7 @@ const QuickViewProductBody = ({ product }: Props) => {
             />
             <AddToCartButton
               productName={product.name}
-              className="ms-2 bg-success"
+              className="ms-2 bg-dark"
             />
           </div>
           <hr className="me-3" />

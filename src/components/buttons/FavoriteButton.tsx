@@ -19,16 +19,11 @@ const FavoriteButton = () => {
 
   useEffect(() => {
     setCounterNumber();
-    window.addEventListener('storage', setCounterNumber);
   }, []);
 
   return (
     <CenteredItems flexColumn role="button" className="me-2 m-0 p-0">
-      <div>
-        <AiFillHeart />
-        <span className="text-black ps-2 pe-2">{counter}</span>
-      </div>
-      <small className="text-center">Favorites</small>
+      <AiFillHeart size={30} color="white" />
     </CenteredItems>
   );
 };

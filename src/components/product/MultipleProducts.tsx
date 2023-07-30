@@ -3,7 +3,7 @@ import React from 'react';
 
 import { Col, Image } from 'react-bootstrap';
 
-import NoProductsImg from '../../assets/frontPage/no-products.png';
+import NoProductsImg from '../../assets/global/no-products.png';
 import IProduct from '../../interfaces/IProduct';
 import CenteredItems from '../../styles/CenteredItems';
 import ProductCard from '../cards/ProductCard';

@@ -7,7 +7,7 @@ const getQueryParam = (key: string, searchParam: URLSearchParams) => {
       return [];
     }
   } catch (error) {
-    return searchParam.get(key);
+    return [];
   }
 };
 

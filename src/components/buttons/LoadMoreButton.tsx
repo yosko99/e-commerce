@@ -17,7 +17,9 @@ const LoadMoreButton = ({
   setPagination
 }: Props) => {
   const loadMore = () => {
-    setPagination((prev) => prev + 10);
+    const tempPagination =
+      pagination + 10 > productsLength ? productsLength : pagination + 10;
+    setPagination((prev) => tempPagination);
   };
 
   return pagination < productsLength ? (
