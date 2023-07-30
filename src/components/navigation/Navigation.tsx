@@ -4,8 +4,8 @@ import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { BiSearchAlt, BiSolidCart, BiSolidUser } from 'react-icons/bi';
 
+import NavigationBrand from './NavigationBrand';
 import NavigationTopBar from './NavigationTopBar';
-import { useClearFilters } from '../../hooks/useClearFilters';
 import CenteredItems from '../../styles/CenteredItems';
 import FavoriteButton from '../buttons/FavoriteButton';
 import NavigationCategoryButton from '../buttons/NavigationCategoryButton';
@@ -14,7 +14,6 @@ import OffCanvasCategories from '../category/OffCanvasCategories';
 import ProductSearch from '../filters/ProductSearch';
 
 const Navigation = () => {
-  const { handleClick: handleClearFilters } = useClearFilters();
   const [hoveredCategory, setHoveredCategory] = useState('');
   const [categoryIndex, setCategoryIndex] = useState(-1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -44,15 +43,9 @@ const Navigation = () => {
         style={{ backgroundColor: '#2D2D2D' }}
         className="bg-body-tertiary p-0 d-flex flex-column"
       >
-        <Container style={{ height: '60px' }}>
+        <Container className="navigation">
           <OffCanvasCategories />
-          <Navbar.Brand
-            href="#"
-            onClick={handleClearFilters}
-            className="text-white"
-          >
-            <p className="m-0 fw-bold">Brand</p>
-          </Navbar.Brand>
+          <NavigationBrand />
           <NavigationCategoryButton
             gender="men"
             hoveredCategory={hoveredCategory}

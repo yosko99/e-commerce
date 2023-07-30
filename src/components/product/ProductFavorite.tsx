@@ -9,9 +9,16 @@ import CustomToast from '../utils/CustomToast';
 interface Props {
   product: IProduct;
   className?: string;
+  favoriteText?: string;
+  nonFavoriteText?: string;
 }
 
-const ProductFavorite = ({ product, className }: Props) => {
+const ProductFavorite = ({
+  product,
+  className,
+  favoriteText,
+  nonFavoriteText
+}: Props) => {
   const heartSize = 20;
   const [heart, setHeart] = useState<React.ReactNode>(
     <AiOutlineHeart size={heartSize} />
@@ -56,9 +63,10 @@ const ProductFavorite = ({ product, className }: Props) => {
         checkIfProductLiked(product.id) ? 'removed from' : 'added to'
       } your favorites`}
       activateElement={
-        <div className={className} onClick={handleClick} role="button">
+        <span className={className} onClick={handleClick} role="button">
+          {checkIfProductLiked(product.id) ? favoriteText : nonFavoriteText}
           {heart}
-        </div>
+        </span>
       }
     />
   );

@@ -56,12 +56,7 @@ const QuickViewProductBody = ({ product }: Props) => {
         <div className="border-start ps-4 pt-2 pe-2" style={{ width: '500px' }}>
           <p className="mb-0 fs-3">{product.name}</p>
           <small className="text-muted m-0 mb-3">Item No. {product.id}</small>
-          <ProductPrice
-            className="mt-2 fs-4 mb-2"
-            price={product.price}
-            isSale={product.c_isSale}
-            maxPrice={product.price_max}
-          />
+          <ProductPrice className="mt-2 fs-4 mb-2" product={product} />
           <p className="fw-bold mt-2">Select size</p>
           <QuickViewSizes
             distinctSizes={variants.distinctSizes}

@@ -51,6 +51,16 @@ const GlobalCSS = createGlobalStyle`
 		display: block;
 	}
 
+	.navigation {
+		height: 60px
+	}
+
+	.navigation-categories {
+		background-color: #525050;
+		position: absolute;
+		top: 60px;
+	}
+
 	@media (max-width: 768px) {
 		.backdrop {
 			background-color: #eee;
@@ -64,6 +74,13 @@ const GlobalCSS = createGlobalStyle`
 			position: fixed;
 			top: 30px;
 			width: 90%;
+		}
+		.navigation {
+			height: 45px
+		}
+
+		.navigation-categories {
+			top: 45px;
 		}
 	}
     `;

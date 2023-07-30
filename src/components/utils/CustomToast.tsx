@@ -25,8 +25,8 @@ const CustomToast = ({ activateElement, body, type }: Props) => {
     });
 
   return (
-    <div>
-      <div onClick={notify}>{activateElement}</div>
+    <span>
+      <span onClick={notify}>{activateElement}</span>
       <ToastContainer
         position="bottom-left"
         autoClose={50000}
@@ -39,7 +39,7 @@ const CustomToast = ({ activateElement, body, type }: Props) => {
         pauseOnHover
         theme="light"
       />
-    </div>
+    </span>
   );
 };
 

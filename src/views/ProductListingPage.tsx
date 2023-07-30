@@ -12,11 +12,11 @@ import selectedFiltersAtom from '../atoms/selectedFilters.atom';
 import selectedProductsAtom from '../atoms/selectedProducts.atom';
 import LoadMoreButton from '../components/buttons/LoadMoreButton';
 import ProductSort from '../components/filters/ProductSort';
+import Breadcrumbs from '../components/navigation/Breadcrumbs';
+import Navigation from '../components/navigation/Navigation';
 import MultipleProducts from '../components/product/MultipleProducts';
-import Breadcrumbs from '../components/utils/Breadcrumbs';
 import CategoryInfo from '../components/utils/CategoryInfo';
 import Filters from '../components/utils/Filters';
-import Navigation from '../components/utils/Navigation';
 import getCategoryProducts from '../functions/getCategoryProducts';
 import getFilteredProducts from '../functions/getFilteredProducts';
 import getQueryFilters from '../functions/getQueryFilters';
@@ -60,7 +60,7 @@ const ProductListingPage = () => {
   return (
     <>
       <Navigation />
-      <Breadcrumbs />
+      <Breadcrumbs className="border-bottom" />
       <Container className="mt-3">
         <Row>
           <Col lg={3}>

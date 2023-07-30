@@ -32,14 +32,7 @@ const NavbarCategories = ({ categoryIndex }: Props) => {
   return (
     <>
       {categoryIndex !== -1 && (
-        <div
-          className="w-100 d-flex py-1"
-          style={{
-            backgroundColor: '#525050',
-            position: 'absolute',
-            top: '60px'
-          }}
-        >
+        <div className="w-100 d-flex py-1 navigation-categories">
           <Container className="d-flex">
             {navbarCategories.map((subcategory: ISubcategory, index) => (
               <Link
