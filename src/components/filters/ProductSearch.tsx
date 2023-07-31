@@ -55,6 +55,10 @@ const ProductSearch = ({
             ) : (
               index < 6 && (
                 <SearchBarProduct
+                  onClick={() => {
+                    setIsInputFocused(true);
+                    inputRef.current?.focus();
+                  }}
                   isHovered={index === hoveredSearchIndex}
                   setHoveredSearchIndex={setHoveredSearchIndex}
                   index={index}
@@ -69,13 +73,15 @@ const ProductSearch = ({
         type="text"
         autoFocus={isInputFocused}
         onFocus={() => setIsInputFocused(true)}
-        onBlur={handleOnBlur}
-        className="p-1 mx-4 search-product-input"
+        className="p-1 ps-4 mx-4 search-product-input"
         value={value}
         onChange={(e) => handleSearch(e.target.value)}
         placeholder="Search"
       />
-      <div className={`backdrop ${isInputFocused ? 'active' : ''}`} />
+      <div
+        onClick={handleOnBlur}
+        className={`backdrop ${isInputFocused ? 'active' : ''}`}
+      />
     </div>
   );
 };
