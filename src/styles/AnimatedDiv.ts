@@ -13,6 +13,8 @@ const animateShadow = keyframes`
 `;
 
 const AnimatedDiv = styled.div`
+  border-radius: 10px;
+  padding-top: 1em;
   &:hover {
     animation: ${animateShadow} 1s ease-in-out infinite;
   }
