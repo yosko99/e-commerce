@@ -16,7 +16,7 @@ const ColorFilter = ({ filters }: Props) => {
   const [selectedFilters, setSelectedFilters] = useAtom(selectedFiltersAtom);
 
   const handleClick = (value: string) => {
-    updateSelectedFilter(selectedFilters, value, selectedFilters.colors);
+    updateSelectedFilter(value, selectedFilters.colors);
 
     setSelectedFilters({ ...selectedFilters });
   };
